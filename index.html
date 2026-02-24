@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>JKOD Tech | Tienda</title>
+  <meta name="description" content="JKOD Tech - Fundas, vidrios, cargadores iPhone/Android, cables y power banks." />
+
+  <style>
+    :root{
+      --bg:#0a0d10;
+      --card:#12181f;
+      --line:#1e2a35;
+      --text:#eaf0f6;
+      --muted:#a9b7c6;
+      --brand:#35ff6a;
+      --brand2:#20c455;
+      --danger:#ff5a5a;
+
+      --radius:16px;
+      --radius2:12px;
+
+      --shadow: 0 10px 26px rgba(0,0,0,.55);
+      --maxw: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      background: var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:#0b1117;
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .row{
+      display:flex; align-items:center; gap:12px;
+      padding:12px 0;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      flex: 1 1 240px;
+      min-width:240px;
+    }
+    .mark{
+      width:38px;height:38px;border-radius:12px;
+      background:#0f1720;
+      border:1px solid rgba(53,255,106,.25);
+      box-shadow: 0 10px 22px rgba(53,255,106,.12);
+      position:relative;
+      flex:0 0 auto;
+    }
+    .mark:after{
+      content:"";
+      position:absolute; inset:11px 13px;
+      background: #eaf0f6;
+      clip-path: polygon(42% 0, 62% 0, 54% 42%, 70% 42%, 32% 100%, 42% 56%, 27% 56%);
+      border-radius:4px;
+      opacity:.92;
+    }
+    .brand b{letter-spacing:.4px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+    .search{
+      flex: 3 1 380px;
+      min-width: 220px;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#0f1720;
+    }
+    .search input{
+      width:100%;
+      border:none; outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+    }
+
+    .btnIcon{
+      border:1px solid var(--line);
+      background:#0f1720;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      transition: .15s transform, .15s border-color;
+      white-space:nowrap;
+      font-weight:900;
+    }
+    .btnIcon:hover{transform: translateY(-1px); border-color: rgba(53,255,106,.25)}
+    .btnIcon strong{color:var(--brand)}
+
+    .cartBtn{position:relative}
+    .badge{
+      position:absolute; top:-6px; right:-6px;
+      min-width:22px; height:22px;
+      border-radius:999px;
+      background: var(--brand);
+      color:#071008;
+      font-weight:900;
+      font-size:12px;
+      display:flex; align-items:center; justify-content:center;
+      border:2px solid #0b1117;
+    }
+
+    /* Hero */
+    .hero{padding:22px 0 10px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr}
+    }
+    .heroCard{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .heroTitle{
+      margin:0 0 8px;
+      font-size:32px;
+      line-height:1.08;
+      letter-spacing:.2px;
+    }
+    .heroTitle span{color:var(--brand)}
+    .heroSub{
+      margin:0 0 14px;
+      color:var(--muted);
+      max-width: 64ch;
+      line-height:1.4;
+    }
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      border:none; outline:none;
+      border-radius: 12px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:900;
+      transition: .15s transform, .15s filter;
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btnPrimary{
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      color:#071008;
+    }
+    .btnGhost{
+      background:#0f1720;
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
+    .infoCard{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+      display:grid; gap:12px;
+    }
+    .infoCard .row{
+      display:flex; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      padding-bottom:10px;
+    }
+    .infoCard .row:last-child{border-bottom:none;padding-bottom:0}
+    .kpi b{display:block;font-size:13px}
+    .kpi small{color:var(--muted)}
+
+    /* Catalog */
+    .catalog{padding:12px 0 50px}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin: 12px 0 10px;
+    }
+    .sectionHead h2{margin:0;font-size:18px;letter-spacing:.2px}
+    .sectionHead p{margin:0;color:var(--muted);font-size:13px}
+
+    .tabs{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin: 12px 0 14px;
+    }
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#0f1720;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      transition: .15s transform, .15s border-color, .15s background;
+      user-select:none;
+    }
+    .tab:hover{transform: translateY(-1px); border-color: rgba(53,255,106,.25)}
+    .tab.active{
+      background:#101b18;
+      border-color: rgba(53,255,106,.26);
+      color: var(--text);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 640px){ .grid{grid-template-columns: 1fr;} }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px;
+      display:flex; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .cardHead h3{margin:0;font-size:15px}
+    .price{font-weight:900;color:var(--brand);white-space:nowrap;font-size:13px}
+    .desc{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    .tags{
+      padding:10px 14px 0;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0f1720;
+      color: var(--text);
+    }
+
+    .cardBody{padding:12px 14px 14px; display:grid; gap:10px}
+
+    .input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      background:#0b1117;
+      border:1px solid var(--line);
+      color: var(--text);
+      outline:none;
+    }
+    select option{background:#0a0d10}
+    @media (max-width:640px){
+      .input, select{font-size:16px}
+    }
+
+    .fieldRow{
+      display:grid;
+      grid-template-columns: 1fr 120px;
+      gap:10px;
+      align-items:center;
+    }
+    @media (max-width: 420px){ .fieldRow{grid-template-columns:1fr} }
+
+    .qty{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px;
+      padding:9px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background:#0b1117;
+      user-select:none;
+    }
+    .qty button{
+      width:38px;height:38px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#0f1720;
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+    }
+    .qty span{min-width:26px;text-align:center;font-weight:900}
+
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:2px;
+    }
+    .btnAdd{
+      flex:1;
+      border:1px solid rgba(53,255,106,.22);
+      background:#101b18;
+      color: var(--text);
+    }
+    .btnBuy{
+      flex:1;
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      color:#071008;
+    }
+
+    /* Cart Drawer */
+    .overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.75);
+      display:none;
+      z-index:80;
+    }
+    .overlay.show{display:block}
+
+    .drawer{
+      position:fixed; top:0; right:0; height:100%;
+      width:min(420px, 92vw);
+      background:#0b1117;
+      border-left:1px solid var(--line);
+      transform: translateX(110%);
+      transition: .2s transform;
+      z-index:90;
+      display:flex;
+      flex-direction:column;
+    }
+    .drawer.show{transform: translateX(0)}
+    @media (max-width:520px){
+      .drawer{width:100vw;border-left:none}
+    }
+
+    .drawerHead{
+      padding:14px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .drawerHead h3{margin:0;font-size:15px}
+    .closeX{
+      width:44px;height:44px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0f1720;
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+    }
+    .drawerBody{padding:12px 14px; overflow:auto; flex:1}
+    .drawerFoot{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:grid; gap:10px;
+    }
+    .totalRow{display:flex; justify-content:space-between; font-weight:900}
+    .totalRow span{color:var(--muted);font-weight:800}
+    .note{color:var(--muted);font-size:12px;line-height:1.35}
+
+    .cartEmpty{
+      color:var(--muted);
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      padding:14px;
+      text-align:center;
+      margin-top:10px;
+      background: var(--card);
+    }
+    .cartItem{
+      border:1px solid rgba(255,255,255,.08);
+      background: var(--card);
+      border-radius: var(--radius2);
+      padding:12px;
+      margin-bottom:10px;
+      display:grid; gap:8px;
+    }
+    .cartItemTop{
+      display:flex; justify-content:space-between; gap:10px;
+    }
+    .cartItem b{font-size:14px}
+    .cartItem small{color:var(--muted)}
+    .row2{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .miniBtns{display:flex; gap:8px; align-items:center}
+    .miniBtns button{
+      width:40px;height:40px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#0f1720;
+      color:var(--text);
+      font-weight:900;
+      cursor:pointer;
+    }
+    .remove{
+      height:40px;
+      padding:0 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,90,90,.25);
+      background: rgba(255,90,90,.10);
+      color:#ffd1d1;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    footer{
+      padding:18px 0 40px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:18px;
+      font-size:13px;
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform: translateX(-50%);
+      background:#0b1117;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding:10px 12px;
+      display:flex; gap:10px; align-items:center;
+      box-shadow: var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:.18s opacity, .18s transform;
+      z-index:120;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-4px)}
+    .dot{width:10px;height:10px;border-radius:50%;background: var(--brand)}
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <b>JKOD Tech</b>
+            <small>Accesorios para tu celular</small>
+          </div>
+        </div>
+
+        <div class="search">
+          <span style="opacity:.85">🔎</span>
+          <input id="searchInput" placeholder="Buscar: fundas, vidrios, cargador iPhone, USB-C..." />
+        </div>
+
+        <button class="btnIcon" id="quickDM" type="button" title="Escribir por WhatsApp">
+          💬 <strong>WhatsApp</strong>
+        </button>
+
+        <button class="btnIcon cartBtn" id="openCart" type="button" title="Abrir carrito">
+          🛒 Carrito <span class="badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <h1 class="heroTitle">Accesorios para celulares mobiles <span>JKOD</span> TECH.</h1>
+          <p class="heroSub">
+            Fundas Armadura, vidrios templados <b>Super X</b>, cargadores y cables para <b>iPhone</b> y <b>Android</b>,
+            y power banks. Arma tu pedido y envíalo directo por WhatsApp.
+          </p>
+          <div class="heroActions">
+            <button class="btn btnPrimary" id="goCatalog" type="button">Ver catálogo</button>
+            <button class="btn btnGhost" id="goArmadura" type="button">Fundas Armadura</button>
+            <button class="btn btnGhost" id="goVidrios" type="button">Vidrios Super X</button>
+          </div>
+        </div>
+
+        <div class="infoCard">
+          <div class="row">
+            <div class="kpi">
+              <b>Compra por WhatsApp</b>
+              <small>Rápido y directo.</small>
+            </div>
+            <div class="kpi" style="text-align:right">
+              <b style="color:var(--brand)">Atención</b>
+              <small>Por WhatsApp</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="kpi">
+              <b>Modelos disponibles</b>
+              <small>Listado actualizado en fundas.</small>
+            </div>
+            <div class="kpi" style="text-align:right">
+              <b style="color:var(--brand)">Envíos</b>
+              <small>Según ciudad</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="kpi">
+              <b>¿No ves tu modelo?</b>
+              <small>Pregúntanos igual.</small>
+            </div>
+            <div class="kpi" style="text-align:right">
+              <b style="color:var(--brand)">Soporte</b>
+              <small>Te ayudamos</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog" id="catalog">
+      <div class="sectionHead">
+        <div>
+          <h2>Catálogo</h2>
+          <p>Selecciona opciones y envía tu pedido por WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="tabs" id="tabs">
+        <div class="tab active" data-tab="all">Todo</div>
+        <div class="tab" data-tab="armadura">Fundas Armadura</div>
+        <div class="tab" data-tab="vidrios">Vidrios</div>
+        <div class="tab" data-tab="cargadores">Cargadores</div>
+        <div class="tab" data-tab="cables">Cables</div>
+        <div class="tab" data-tab="powerbanks">Power banks</div>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> <b>JKOD Tech</b> · Tienda por WhatsApp · Colombia
+    </footer>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Carrito">
+    <div class="drawerHead">
+      <h3>Tu carrito</h3>
+      <button class="closeX" id="closeCart" type="button" title="Cerrar">✕</button>
+    </div>
+    <div class="drawerBody" id="cartList">
+      <div class="cartEmpty" id="cartEmpty">
+        Aún no has agregado productos.<br/>Elige algo del catálogo y presiona <b>Agregar</b>.
+      </div>
+    </div>
+    <div class="drawerFoot">
+      <div class="totalRow">
+        <span>Total</span>
+        <div id="cartTotal">A convenir</div>
+      </div>
+      <button class="btn btnPrimary" id="checkoutBtn" type="button">Comprar por WhatsApp</button>
+      <button class="btn btnGhost" id="clearBtn" type="button">Vaciar carrito</button>
+      <div class="note">
+        * Si el precio dice “DM”, confirmamos valor y disponibilidad por WhatsApp.
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <div class="dot"></div>
+    <div id="toastText">Listo</div>
+  </div>
+
+  <script>
+    /***********************
+     * CONFIG
+     ***********************/
+    const WHATSAPP_NUMBER = "573244688713";
+    const CURRENCY_PREFIX = "$";
+
+    /***********************
+     * MODELOS (los de tu imagen)
+     ***********************/
+    const ARMADURA_MODELS = [
+      "Redmi A5","Redmi 12","Redmi 13C","Note 11","Note 14 4G","Note 13 Pro","Note 14 Pro","Poco X7",
+      "Samsung A12","Samsung A13","Samsung A15","Samsung A21s","Samsung A22 4G","Samsung A35","Samsung A55","Samsung A56",
+      "Moto G10 / G20 / G30","Moto G85","Oppo Reno 13","Oppo A60","Infinix Smart 10","Infinix Hot 50 Pro",
+      "Honor X7C","Honor X8C","Honor X9C"
+    ];
+
+    // Vidrios (genérico para forzar pregunta de modelo)
+    const VIDRIO_MODELS = [
+      "Samsung (escribe el modelo en WhatsApp)",
+      "iPhone (escribe el modelo en WhatsApp)",
+      "Xiaomi/Redmi (escribe el modelo en WhatsApp)",
+      "Motorola (escribe el modelo en WhatsApp)",
+      "Oppo (escribe el modelo en WhatsApp)",
+      "Infinix (escribe el modelo en WhatsApp)",
+      "Honor (escribe el modelo en WhatsApp)"
+    ];
+
+    /***********************
+     * PRODUCTOS
+     ***********************/
+    const PRODUCTS = [
+      {
+        id:"armadura", tab:"armadura",
+        name:"Funda Armadura",
+        desc:"Protección reforzada y diseño resistente.",
+        tags:["Alta protección","Agarre seguro","Stock"],
+        price:0,
+        needsModel:true,
+        modelLabel:"Selecciona tu modelo",
+        models:ARMADURA_MODELS,
+        ctaBuy:"Preguntar por mi modelo"
+      },
+      {
+        id:"vidrio", tab:"vidrios",
+        name:"Vidrio templado Super X",
+        desc:"Anti-rayones y protección para pantalla.",
+        tags:["Super X","Pantalla","Fácil instalación"],
+        price:0,
+        needsModel:true,
+        modelLabel:"Marca (modelo por WhatsApp)",
+        models:VIDRIO_MODELS,
+        ctaBuy:"Pedir por WhatsApp"
+      },
+      {
+        id:"cargador-iphone", tab:"cargadores",
+        name:"Cargador iPhone",
+        desc:"Carga segura. Elige cable/adaptador.",
+        tags:["iPhone","Carga","Calidad"],
+        price:0,
+        needsType:true,
+        typeLabel:"Elige tipo",
+        types:["Cable Lightning","Cable USB-C (iPhone 15/16)","Solo adaptador","Combo adaptador + cable"],
+        ctaBuy:"Comprar"
+      },
+      {
+        id:"cargador-android", tab:"cargadores",
+        name:"Cargador Android (USB-C)",
+        desc:"Para la mayoría de Android (Tipo C).",
+        tags:["Android","USB-C","Fast"],
+        price:0,
+        needsType:true,
+        typeLabel:"Elige tipo",
+        types:["Cable USB-C","Adaptador USB-C","Combo adaptador + cable"],
+        ctaBuy:"Comprar"
+      },
+      {
+        id:"cables", tab:"cables",
+        name:"Cables",
+        desc:"Carga y datos. Elige el tipo.",
+        tags:["Resistente","Rápido","Garantía"],
+        price:0,
+        needsType:true,
+        typeLabel:"Tipo de cable",
+        types:["USB-C a USB-C","USB-A a USB-C","USB-A a Lightning","USB-C a Lightning"],
+        ctaBuy:"Comprar"
+      },
+      {
+        id:"powerbank", tab:"powerbanks",
+        name:"Power Bank",
+        desc:"Batería portátil para emergencias.",
+        tags:["Portátil","Energía","Viajes"],
+        price:0,
+        needsType:true,
+        typeLabel:"Capacidad",
+        types:["5,000 mAh","10,000 mAh","20,000 mAh"],
+        ctaBuy:"Cotizar"
+      }
+    ];
+
+    /***********************
+     * HELPERS
+     ***********************/
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function money(n){
+      if(!n || n === 0) return "DM";
+      return `${CURRENCY_PREFIX}${Number(n).toLocaleString("es-CO")}`;
+    }
+
+    function buildSelect(options, placeholder){
+      const sel = document.createElement("select");
+      const opt0 = document.createElement("option");
+      opt0.value = "";
+      opt0.textContent = placeholder;
+      sel.appendChild(opt0);
+      options.forEach(v=>{
+        const o = document.createElement("option");
+        o.value = v; o.textContent = v;
+        sel.appendChild(o);
+      });
+      return sel;
+    }
+
+    function buildQty(){
+      const wrap = document.createElement("div");
+      wrap.className = "qty";
+      const minus = document.createElement("button");
+      minus.type="button"; minus.textContent="−";
+      const val = document.createElement("span");
+      val.textContent="1";
+      const plus = document.createElement("button");
+      plus.type="button"; plus.textContent="+";
+
+      minus.addEventListener("click", ()=> val.textContent = String(Math.max(1, Number(val.textContent)-1)));
+      plus.addEventListener("click", ()=> val.textContent = String(Math.min(99, Number(val.textContent)+1)));
+
+      wrap.append(minus,val,plus);
+      wrap.getValue = ()=> Number(val.textContent);
+      return wrap;
+    }
+
+    function buildItemKey(pid, model, type, note){
+      return [pid, model||"-", type||"-", note||"-"].join("|");
+    }
+
+    /***********************
+     * RENDER PRODUCTS
+     ***********************/
+    const grid = document.getElementById("productGrid");
+    const tabs = document.querySelectorAll(".tab");
+    const searchInput = document.getElementById("searchInput");
+
+    let activeTab = "all";
+
+    function renderProducts(){
+      const q = (searchInput.value || "").trim().toLowerCase();
+      grid.innerHTML = "";
+
+      const filtered = PRODUCTS.filter(p=>{
+        const byTab = (activeTab==="all") ? true : (p.tab===activeTab);
+        const text = (p.name+" "+p.desc+" "+(p.tags||[]).join(" ")).toLowerCase();
+        const byQuery = q ? text.includes(q) : true;
+        return byTab && byQuery;
+      });
+
+      if(filtered.length === 0){
+        const div = document.createElement("div");
+        div.className = "cartEmpty";
+        div.textContent = "No encontramos resultados. Prueba otra palabra.";
+        grid.appendChild(div);
+        return;
+      }
+
+      filtered.forEach(p=>{
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const head = document.createElement("div");
+        head.className = "cardHead";
+
+        const left = document.createElement("div");
+        const h3 = document.createElement("h3");
+        h3.textContent = p.name;
+        const desc = document.createElement("div");
+        desc.className = "desc";
+        desc.textContent = p.desc;
+        left.append(h3, desc);
+
+        const pr = document.createElement("div");
+        pr.className = "price";
+        pr.textContent = money(p.price);
+
+        head.append(left, pr);
+
+        const tags = document.createElement("div");
+        tags.className = "tags";
+        (p.tags||[]).slice(0,3).forEach(t=>{
+          const tag = document.createElement("div");
+          tag.className = "tag";
+          tag.textContent = t;
+          tags.appendChild(tag);
+        });
+
+        const body = document.createElement("div");
+        body.className = "cardBody";
+
+        let modelSelect = null;
+        let typeSelect = null;
+
+        if(p.needsModel){
+          modelSelect = buildSelect(p.models, p.modelLabel || "Selecciona");
+          body.appendChild(modelSelect);
+        }
+        if(p.needsType){
+          typeSelect = buildSelect(p.types, p.typeLabel || "Selecciona");
+          body.appendChild(typeSelect);
+        }
+
+        const row = document.createElement("div");
+        row.className = "fieldRow";
+
+        const note = document.createElement("input");
+        note.className = "input";
+        note.placeholder = "Nota (color/detalle) opcional";
+        note.maxLength = 60;
+
+        const qty = buildQty();
+
+        row.append(note, qty);
+        body.appendChild(row);
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const add = document.createElement("button");
+        add.className = "btn btnAdd";
+        add.type="button";
+        add.textContent = "Agregar";
+
+        const buy = document.createElement("button");
+        buy.className = "btn btnBuy";
+        buy.type="button";
+        buy.textContent = p.ctaBuy || "Comprar";
+
+        add.addEventListener("click", ()=>{
+          const selection = readSelection(p, modelSelect, typeSelect, qty, note);
+          if(!selection.ok) return toast(selection.error, true);
+          addToCart(selection.item);
+          toast("Agregado al carrito");
+        });
+
+        buy.addEventListener("click", ()=>{
+          const selection = readSelection(p, modelSelect, typeSelect, qty, note);
+          if(!selection.ok) return toast(selection.error, true);
+          openWhatsApp(buildWhatsAppMessage([selection.item]));
+        });
+
+        actions.append(add, buy);
+        body.appendChild(actions);
+
+        card.append(head, tags, body);
+        grid.appendChild(card);
+      });
+    }
+
+    function readSelection(product, modelSelect, typeSelect, qtyComp, noteInput){
+      const qty = qtyComp.getValue();
+      const note = (noteInput.value || "").trim();
+
+      let model = "";
+      if(product.needsModel){
+        model = (modelSelect.value || "").trim();
+        if(product.id === "armadura" && !model){
+          return {ok:false, error:"Selecciona tu modelo para la funda Armadura."};
+        }
+      }
+
+      let type = "";
+      if(product.needsType){
+        type = (typeSelect.value || "").trim();
+        if(!type) return {ok:false, error:"Selecciona el tipo (USB-C / Lightning / etc.)."};
+      }
+
+      const item = {
+        key: buildItemKey(product.id, model, type, note),
+        name: product.name,
+        price: product.price,
+        qty, model, type, note
+      };
+
+      return {ok:true, item};
+    }
+
+    /***********************
+     * CART
+     ***********************/
+    const cart = new Map();
+    const cartCountEl = document.getElementById("cartCount");
+    const cartTotalEl = document.getElementById("cartTotal");
+    const cartListEl = document.getElementById("cartList");
+    const cartEmptyEl = document.getElementById("cartEmpty");
+
+    function addToCart(item){
+      if(cart.has(item.key)){
+        const ex = cart.get(item.key);
+        ex.qty = Math.min(99, ex.qty + item.qty);
+        cart.set(item.key, ex);
+      } else cart.set(item.key, item);
+      updateCartUI();
+    }
+    function removeFromCart(key){ cart.delete(key); updateCartUI(); }
+    function changeQty(key, delta){
+      const it = cart.get(key); if(!it) return;
+      it.qty = Math.max(1, Math.min(99, it.qty + delta));
+      cart.set(key, it);
+      updateCartUI();
+    }
+    function clearCart(){ cart.clear(); updateCartUI(); }
+
+    function computeTotal(){
+      let total = 0;
+      for(const it of cart.values()){
+        if(it.price && it.price > 0) total += it.price * it.qty;
+      }
+      return total;
+    }
+
+    function updateCartUI(){
+      const count = Array.from(cart.values()).reduce((a,it)=>a+it.qty,0);
+      cartCountEl.textContent = String(count);
+
+      const total = computeTotal();
+      cartTotalEl.textContent = (total > 0) ? `${CURRENCY_PREFIX}${total.toLocaleString("es-CO")}` : "A convenir";
+
+      cartListEl.innerHTML = "";
+      if(cart.size === 0){
+        cartListEl.appendChild(cartEmptyEl);
+        cartEmptyEl.style.display = "block";
+        return;
+      }
+      cartEmptyEl.style.display = "none";
+
+      for(const it of cart.values()){
+        const box = document.createElement("div");
+        box.className = "cartItem";
+
+        const top = document.createElement("div");
+        top.className = "cartItemTop";
+
+        const left = document.createElement("div");
+        const title = document.createElement("b");
+        title.textContent = it.name;
+
+        const meta = document.createElement("small");
+        const parts = [];
+        if(it.model) parts.push("Modelo: " + it.model);
+        if(it.type) parts.push("Tipo: " + it.type);
+        if(it.note) parts.push("Nota: " + it.note);
+        meta.textContent = parts.join(" • ") || "Sin detalles";
+
+        left.append(title, meta);
+
+        const right = document.createElement("div");
+        right.className = "price";
+        right.textContent = money(it.price);
+
+        top.append(left, right);
+
+        const row2 = document.createElement("div");
+        row2.className = "row2";
+
+        const mini = document.createElement("div");
+        mini.className = "miniBtns";
+
+        const minus = document.createElement("button");
+        minus.type="button"; minus.textContent="−";
+        minus.addEventListener("click", ()=>changeQty(it.key, -1));
+
+        const q = document.createElement("div");
+        q.style.minWidth="32px";
+        q.style.textAlign="center";
+        q.style.fontWeight="900";
+        q.textContent = String(it.qty);
+
+        const plus = document.createElement("button");
+        plus.type="button"; plus.textContent="+";
+        plus.addEventListener("click", ()=>changeQty(it.key, +1));
+
+        mini.append(minus, q, plus);
+
+        const del = document.createElement("button");
+        del.className = "remove";
+        del.type="button";
+        del.textContent = "Eliminar";
+        del.addEventListener("click", ()=>removeFromCart(it.key));
+
+        row2.append(mini, del);
+
+        box.append(top, row2);
+        cartListEl.appendChild(box);
+      }
+    }
+
+    /***********************
+     * WHATSAPP
+     ***********************/
+    function openWhatsApp(message){
+      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+    }
+
+    function buildWhatsAppMessage(items){
+      const lines = [];
+      lines.push("Hola JKOD Tech 👋");
+      lines.push("Quiero este pedido:");
+
+      items.forEach((it, i)=>{
+        const details = [];
+        if(it.model) details.push("Modelo: " + it.model);
+        if(it.type) details.push("Tipo: " + it.type);
+        if(it.note) details.push("Nota: " + it.note);
+        lines.push(`\n${i+1}) ${it.name} x${it.qty}`);
+        if(details.length) lines.push("   - " + details.join(" | "));
+      });
+
+      const total = computeTotal();
+      lines.push("\n---");
+      lines.push("Total: " + (total > 0 ? `${CURRENCY_PREFIX}${total.toLocaleString("es-CO")}` : "A convenir"));
+      lines.push("¿Disponibilidad y precio para mi modelo? ✅");
+      return lines.join("\n");
+    }
+
+    /***********************
+     * Drawer controls
+     ***********************/
+    const overlay = document.getElementById("overlay");
+    const drawer = document.getElementById("drawer");
+    const openCartBtn = document.getElementById("openCart");
+    const closeCartBtn = document.getElementById("closeCart");
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const quickDM = document.getElementById("quickDM");
+
+    function openDrawer(){
+      overlay.classList.add("show");
+      drawer.classList.add("show");
+      document.body.style.overflow="hidden";
+    }
+    function closeDrawer(){
+      overlay.classList.remove("show");
+      drawer.classList.remove("show");
+      document.body.style.overflow="";
+    }
+
+    openCartBtn.addEventListener("click", openDrawer);
+    closeCartBtn.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    checkoutBtn.addEventListener("click", ()=>{
+      if(cart.size === 0) return toast("Tu carrito está vacío", true);
+      openWhatsApp(buildWhatsAppMessage(Array.from(cart.values())));
+    });
+    clearBtn.addEventListener("click", ()=>{
+      if(cart.size === 0) return;
+      clearCart();
+      toast("Carrito vaciado");
+    });
+
+    quickDM.addEventListener("click", ()=>{
+      openWhatsApp("Hola JKOD Tech 👋\nQuiero preguntar por accesorios.\n\nMarca y modelo:");
+    });
+
+    /***********************
+     * Tabs + search
+     ***********************/
+    tabs.forEach(t=>{
+      t.addEventListener("click", ()=>{
+        tabs.forEach(x=>x.classList.remove("active"));
+        t.classList.add("active");
+        activeTab = t.dataset.tab;
+        renderProducts();
+      });
+    });
+
+    searchInput.addEventListener("input", renderProducts);
+
+    document.getElementById("goCatalog").addEventListener("click", ()=>{
+      document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    });
+    document.getElementById("goArmadura").addEventListener("click", ()=>{
+      setTab("armadura");
+      document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    });
+    document.getElementById("goVidrios").addEventListener("click", ()=>{
+      setTab("vidrios");
+      document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    });
+
+    function setTab(tab){
+      activeTab = tab;
+      tabs.forEach(x=>x.classList.toggle("active", x.dataset.tab===tab));
+      renderProducts();
+    }
+
+    /***********************
+     * Toast
+     ***********************/
+    const toastEl = document.getElementById("toast");
+    const toastText = document.getElementById("toastText");
+    let toastTimer = null;
+
+    function toast(msg, isError=false){
+      toastText.textContent = msg;
+      toastEl.querySelector(".dot").style.background = isError ? "var(--danger)" : "var(--brand)";
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toastEl.classList.remove("show"), 1700);
+    }
+
+    /***********************
+     * Init
+     ***********************/
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
