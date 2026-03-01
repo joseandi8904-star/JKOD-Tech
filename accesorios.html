@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>JKOD Tech | Accesorios</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png">
+
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--line:#e7eaf2;--text:#0f172a;--muted:#475569;--brand:#16a34a;--brand2:#22c55e;--shadow:0 14px 34px rgba(15,23,42,.10);--max:1100px}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 16px}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);backdrop-filter: blur(10px)}
+    .row{display:flex;gap:12px;align-items:center;padding:12px 0;flex-wrap:wrap}
+    .brand{display:flex;gap:12px;align-items:center;flex:1 1 260px}
+    .logo{width:44px;height:44px;border-radius:999px;border:1px solid rgba(22,163,74,.25);background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 10px 22px rgba(34,197,94,.14)}
+    .logo img{width:32px;height:32px;object-fit:contain}
+    .pill{border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:999px;font-weight:900;display:inline-flex;gap:8px;align-items:center;box-shadow:0 10px 22px rgba(15,23,42,.06);cursor:pointer}
+    .pill strong{color:var(--brand)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:16px;margin:14px 0}
+    h1{margin:0 0 8px;font-size:24px}
+    .sub{margin:0;color:var(--muted);line-height:1.4}
+
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 18px}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .item{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:14px;display:grid;gap:10px}
+    .item b{font-size:14px}
+    .item small{color:var(--muted)}
+    .btn{border:none;border-radius:999px;padding:12px 12px;font-weight:900;cursor:pointer;box-shadow:0 10px 22px rgba(15,23,42,.08)}
+    .btnPrimary{background:linear-gradient(180deg,var(--brand2),var(--brand));color:#052e12}
+    .btnGhost{background:#fff;border:1px solid var(--line)}
+    select, input{
+      width:100%;padding:12px 12px;border-radius:999px;
+      border:1px solid var(--line);background:#fff;outline:none;
+    }
+    @media(max-width:640px){select,input{font-size:16px}}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:520px){.two{grid-template-columns:1fr}}
+
+    .waFloat{position:fixed;right:16px;bottom:16px;width:62px;height:62px;border-radius:999px;border:none;cursor:pointer;background:#25D366;box-shadow:0 18px 40px rgba(37,211,102,.35);display:flex;align-items:center;justify-content:center;z-index:80}
+    .waFloat svg{width:30px;height:30px;fill:#fff}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <a class="pill" href="./index.html">← <strong>Inicio</strong></a>
+
+        <div class="brand">
+          <div class="logo"><img src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="JKOD Tech"></div>
+          <div>
+            <b>Accesorios</b>
+            <div style="color:var(--muted);font-size:12px;margin-top:2px">Fundas, vidrios, cargadores, cables, power banks</div>
+          </div>
+        </div>
+
+        <button class="pill" id="btnWhatsapp" type="button">💬 <strong>WhatsApp</strong></button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="card">
+      <h1>Accesorios</h1>
+      <p class="sub">Selecciona lo que necesitas y te abrimos WhatsApp con el mensaje listo.</p>
+    </div>
+
+    <section class="grid">
+      <div class="item" id="fundas">
+        <b>Fundas Armadura</b>
+        <small>Modelos disponibles (los de tu lista)</small>
+        <select id="modelArmadura">
+          <option value="">Selecciona tu modelo</option>
+        </select>
+        <input id="noteArmadura" placeholder="Color / detalle (opcional)" maxlength="60">
+        <button class="btn btnPrimary" id="buyArmadura">Pedir por WhatsApp</button>
+      </div>
+
+      <div class="item" id="vidrios">
+        <b>Vidrios templados Super X</b>
+        <small>Confirma marca y modelo</small>
+        <div class="two">
+          <select id="brandVidrio">
+            <option value="">Marca</option>
+            <option>Samsung</option>
+            <option>iPhone</option>
+            <option>Xiaomi/Redmi</option>
+            <option>Motorola</option>
+            <option>Oppo</option>
+            <option>Infinix</option>
+            <option>Honor</option>
+          </select>
+          <input id="modelVidrio" placeholder="Modelo (ej: A15 / iPhone 13)" maxlength="40">
+        </div>
+        <button class="btn btnPrimary" id="buyVidrio">Pedir por WhatsApp</button>
+      </div>
+
+      <div class="item" id="cargadores">
+        <b>Cargadores</b>
+        <small>iPhone / Android (USB-C)</small>
+        <select id="chargerType">
+          <option value="">Tipo</option>
+          <option>iPhone - Lightning</option>
+          <option>iPhone 15/16 - USB-C</option>
+          <option>Android - USB-C</option>
+          <option>Solo adaptador</option>
+          <option>Combo adaptador + cable</option>
+        </select>
+        <button class="btn btnPrimary" id="buyCharger">Pedir por WhatsApp</button>
+      </div>
+
+      <div class="item" id="cables">
+        <b>Cables</b>
+        <small>Elige el tipo</small>
+        <select id="cableType">
+          <option value="">Tipo</option>
+          <option>USB-C a USB-C</option>
+          <option>USB-A a USB-C</option>
+          <option>USB-A a Lightning</option>
+          <option>USB-C a Lightning</option>
+        </select>
+        <button class="btn btnGhost" id="buyCable">Pedir por WhatsApp</button>
+      </div>
+
+      <div class="item" id="powerbanks">
+        <b>Power Banks</b>
+        <small>Capacidad</small>
+        <select id="pbType">
+          <option value="">Capacidad</option>
+          <option>5,000 mAh</option>
+          <option>10,000 mAh</option>
+          <option>20,000 mAh</option>
+        </select>
+        <button class="btn btnGhost" id="buyPB">Cotizar por WhatsApp</button>
+      </div>
+
+      <div class="item">
+        <b>¿No ves tu modelo?</b>
+        <small>Escríbenos y lo revisamos</small>
+        <button class="btn btnPrimary" id="askModel">Enviar mi modelo</button>
+      </div>
+    </section>
+  </main>
+
+  <button class="waFloat" id="waFloat" type="button" aria-label="Soporte WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M19.11 17.54c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.2-1.37-.81-.72-1.35-1.6-1.51-1.87-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.24.18 1.71.11.52-.08 1.6-.66 1.83-1.29.23-.63.23-1.17.16-1.29-.07-.12-.25-.2-.52-.34z"/>
+      <path d="M26.73 5.27A14.86 14.86 0 0 0 16.02.99C7.78.99 1.08 7.7 1.08 15.94c0 2.63.69 5.2 2 7.47L.9 31.01l7.77-2.03a14.86 14.86 0 0 0 7.35 1.98h.01c8.24 0 14.94-6.7 14.94-14.94 0-3.99-1.56-7.74-4.24-10.75zM16.03 28.5h-.01a12.4 12.4 0 0 1-6.33-1.74l-.45-.27-4.61 1.2 1.23-4.49-.29-.46a12.4 12.4 0 0 1-1.93-6.65c0-6.84 5.56-12.4 12.4-12.4 3.32 0 6.44 1.29 8.78 3.64a12.33 12.33 0 0 1 3.62 8.78c0 6.84-5.56 12.39-12.41 12.39z"/>
+    </svg>
+  </button>
+
+  <script>
+    const WHATSAPP_NUMBER = "573244688713";
+
+    const ARMADURA_MODELS = [
+      "Redmi A5","Redmi 12","Redmi 13C","Note 11","Note 14 4G","Note 13 Pro","Note 14 Pro","Poco X7",
+      "Samsung A12","Samsung A13","Samsung A15","Samsung A21s","Samsung A22 4G","Samsung A35","Samsung A55","Samsung A56",
+      "Moto G10 / G20 / G30","Moto G85","Oppo Reno 13","Oppo A60","Infinix Smart 10","Infinix Hot 50 Pro",
+      "Honor X7C","Honor X8C","Honor X9C"
+    ];
+
+    function openWhatsApp(text){
+      window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text), "_blank");
+    }
+
+    // Fill select models
+    const sel = document.getElementById("modelArmadura");
+    ARMADURA_MODELS.forEach(m=>{
+      const o = document.createElement("option");
+      o.value = m; o.textContent = m;
+      sel.appendChild(o);
+    });
+
+    document.getElementById("btnWhatsapp").addEventListener("click", ()=>{
+      openWhatsApp("Hola JKOD Tech 👋\nQuiero accesorios.\n\nMarca y modelo:");
+    });
+
+    document.getElementById("buyArmadura").addEventListener("click", ()=>{
+      const model = sel.value.trim();
+      const note = document.getElementById("noteArmadura").value.trim();
+      if(!model) return alert("Selecciona tu modelo para la funda Armadura.");
+      openWhatsApp(`Hola JKOD Tech 👋\nQuiero: Funda Armadura\nModelo: ${model}${note ? `\nNota: ${note}` : ""}\n\n¿Precio y disponibilidad?`);
+    });
+
+    document.getElementById("buyVidrio").addEventListener("click", ()=>{
+      const brand = document.getElementById("brandVidrio").value.trim();
+      const model = document.getElementById("modelVidrio").value.trim();
+      if(!brand || !model) return alert("Completa marca y modelo para el vidrio.");
+      openWhatsApp(`Hola JKOD Tech 👋\nQuiero: Vidrio templado Super X\nMarca: ${brand}\nModelo: ${model}\n\n¿Precio y disponibilidad?`);
+    });
+
+    document.getElementById("buyCharger").addEventListener("click", ()=>{
+      const type = document.getElementById("chargerType").value.trim();
+      if(!type) return alert("Selecciona el tipo de cargador.");
+      openWhatsApp(`Hola JKOD Tech 👋\nQuiero: Cargador\nTipo: ${type}\n\n¿Precio y disponibilidad?`);
+    });
+
+    document.getElementById("buyCable").addEventListener("click", ()=>{
+      const type = document.getElementById("cableType").value.trim();
+      if(!type) return alert("Selecciona el tipo de cable.");
+      openWhatsApp(`Hola JKOD Tech 👋\nQuiero: Cable\nTipo: ${type}\n\n¿Precio y disponibilidad?`);
+    });
+
+    document.getElementById("buyPB").addEventListener("click", ()=>{
+      const cap = document.getElementById("pbType").value.trim();
+      if(!cap) return alert("Selecciona la capacidad del power bank.");
+      openWhatsApp(`Hola JKOD Tech 👋\nQuiero: Power Bank\nCapacidad: ${cap}\n\n¿Precio y disponibilidad?`);
+    });
+
+    document.getElementById("askModel").addEventListener("click", ()=>{
+      openWhatsApp("Hola JKOD Tech 👋\nMi marca y modelo es:\n\nQuiero saber si tienen funda/vidrio/cargador.");
+    });
+
+    document.getElementById("waFloat").addEventListener("click", ()=>{
+      openWhatsApp("Hola JKOD Tech 👋\nNecesito soporte.\n\nMi marca y modelo es:");
+    });
+  </script>
+</body>
+</html>
