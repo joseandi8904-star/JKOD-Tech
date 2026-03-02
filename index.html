@@ -5,328 +5,156 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>JKOD Tech | Tienda</title>
-  <meta name="description" content="JKOD Tech - Celulares y Accesorios" />
-
+  <meta name="description" content="JKOD Tech - Celulares y accesorios. Consulta disponibilidad por WhatsApp." />
   <link rel="icon" type="image/png" href="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png">
 
-  <!-- Cloudflare Turnstile -->
+  <!-- Turnstile (auto render) -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
   <style>
     :root{
-      --bg:#f6f7fb; --card:#fff; --line:#e7eaf2;
-      --text:#0f172a; --muted:#475569;
-      --brand:#16a34a; --brand2:#22c55e;
-      --shadow:0 14px 34px rgba(15,23,42,.10);
-      --r:22px; --max:1100px;
+      --bg:#f5f6f8; --card:#fff; --text:#0f172a; --muted:#64748b;
+      --shadow:0 8px 24px rgba(15,23,42,.08); --r:22px; --accent:#16a34a;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 500px at 20% 0%, rgba(34,197,94,.10), transparent 60%),
-        radial-gradient(900px 400px at 90% 10%, rgba(34,197,94,.08), transparent 60%),
-        var(--bg);
-    }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 16px}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    header{background:var(--card);padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.06);position:sticky;top:0;z-index:5}
+    header img{width:50px;height:50px;border-radius:50%;object-fit:cover}
+    header h1{margin:0;font-size:20px}
+    header small{color:var(--muted)}
+    .container{max-width:980px;margin:0 auto;padding:18px 16px 40px}
 
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-    .row{display:flex; gap:12px; align-items:center; padding:12px 0; flex-wrap:wrap}
-    .brand{display:flex; gap:12px; align-items:center; flex:1 1 260px; min-width:240px}
-    .logo{
-      width:44px;height:44px;border-radius:999px;
-      border:1px solid rgba(22,163,74,.25);
-      background:#fff;
-      box-shadow:0 10px 22px rgba(34,197,94,.14);
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
-    }
-    .logo img{width:32px;height:32px;object-fit:contain}
-    .brand b{letter-spacing:.2px}
-    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+    .hero{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px 18px;margin:18px 0}
+    .hero h2{margin:0 0 10px;font-size:34px;line-height:1.05;letter-spacing:-.7px}
+    .hero .hl{color:var(--accent)}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
 
-    .pill{
-      border:1px solid var(--line);
-      background:#fff;
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight:900;
-      display:inline-flex; gap:8px; align-items:center;
-      box-shadow: 0 10px 22px rgba(15,23,42,.06);
-      cursor:pointer;
-      user-select:none;
-    }
-    .pill strong{color:var(--brand)}
-    .pill[disabled]{
-      opacity:.55;
-      cursor:not-allowed;
-    }
+    .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+    @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .thumb{height:170px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;padding:16px}
+    .thumb img{width:100%;height:100%;object-fit:contain;border-radius:16px}
+    .content{padding:16px 16px 18px}
+    .content h3{margin:0 0 6px;font-size:22px}
+    .content p{margin:0;color:var(--muted)}
+    .btn{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:13px 16px;border-radius:999px;border:none;background:#25D366;color:#fff;font-weight:800;text-decoration:none;cursor:pointer}
+    .btn.disabled{opacity:.45;pointer-events:none}
 
-    .hero{padding:18px 0 6px}
-    .heroCard{
-      background:#fff; border:1px solid var(--line);
-      border-radius:28px; box-shadow:var(--shadow);
-      padding:18px;
-    }
-    h1{margin:0 0 8px; font-size:30px; line-height:1.1}
-    .sub{margin:0; color:var(--muted); line-height:1.4}
-    .sub b{color:var(--text)}
-
-    /* Turnstile card */
-    .verifyWrap{margin-top:14px}
-    .verifyCard{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .verifyLeft{
-      min-width:220px;
-      flex:1 1 240px;
-    }
-    .verifyLeft b{display:block}
-    .verifyLeft small{display:block; color:var(--muted); margin-top:2px}
-    .badgeOk{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(22,163,74,.18);
-      background:rgba(34,197,94,.08);
-      color:#166534;
-      font-weight:900;
-      white-space:nowrap;
-    }
-    .hidden{display:none !important}
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:14px;
-      margin:14px 0 60px;
-    }
-    @media(min-width:900px){
-      .grid{grid-template-columns: repeat(3, 1fr);}
-      h1{font-size:34px}
-    }
-    .cat{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      transition:.15s transform,.15s box-shadow;
-      cursor:pointer;
-    }
-    .cat:hover{transform:translateY(-2px); box-shadow:0 18px 46px rgba(15,23,42,.14)}
-    .thumb{
-      height:140px;
-      display:flex; align-items:center; justify-content:center;
-      background: radial-gradient(200px 120px at 50% 40%, rgba(34,197,94,.14), transparent 70%),
-                  linear-gradient(180deg,#ffffff,#f8fafc);
-    }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
-    .label{
-      padding:14px 14px 16px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .label b{font-size:16px}
-    .label span{color:var(--muted); font-weight:900}
-
-    /* disabled links/cards until verified */
-    .locked{
-      pointer-events:none;
-      opacity:.55;
-      filter:saturate(.9);
-    }
-
-    .waFloat{
-      position:fixed; right:16px; bottom:16px;
-      width:62px;height:62px;border-radius:999px;
-      border:none; cursor:pointer;
-      background:#25D366;
-      box-shadow:0 18px 40px rgba(37,211,102,.35);
-      display:flex; align-items:center; justify-content:center;
-      z-index:80;
-    }
-    .waFloat[disabled]{
-      opacity:.55;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-    .waFloat svg{width:30px;height:30px;fill:#fff}
-
-    footer{color:var(--muted); font-size:13px; padding:14px 0 32px}
+    /* Gate */
+    .gate{position:fixed;inset:0;background:rgba(245,246,248,.92);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999}
+    .gate.hidden{display:none}
+    .gate-box{width:min(520px,100%);background:var(--card);border-radius:26px;box-shadow:0 18px 60px rgba(0,0,0,.18);padding:22px 18px;text-align:center}
+    .gate-box .mini{width:62px;height:62px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block}
+    .gate-box h3{margin:10px 0 6px;font-size:22px}
+    .gate-box p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.35}
+    .status{margin-top:10px;color:var(--muted);font-size:13px}
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="container">
-      <div class="row">
-        <div class="brand">
-          <div class="logo">
-            <img src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="JKOD Tech">
-          </div>
-          <div>
-            <b>JKOD Tech</b>
-            <small>Celulares y accesorios</small>
-          </div>
-        </div>
 
-        <button class="pill" id="btnWhatsapp" type="button" disabled>💬 <strong>WhatsApp</strong></button>
-      </div>
+  <!-- BLOQUEO INICIAL -->
+  <div id="gate" class="gate">
+    <div class="gate-box">
+      <img class="mini" src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="JKOD Tech">
+      <h3>Verificación de seguridad</h3>
+      <p>Completa la verificación para entrar al catálogo.</p>
+
+      <!-- Turnstile widget (auto-render) -->
+      <div class="cf-turnstile"
+           data-sitekey="0x4AAAAAACkbPGAO2WIxAWN5"
+           data-callback="onTSok"
+           data-expired-callback="onTSexp"
+           data-error-callback="onTSerr"></div>
+
+      <div id="status" class="status">Cargando verificación…</div>
     </div>
   </div>
 
+  <header>
+    <img src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="JKOD Tech">
+    <div>
+      <h1>JKOD Tech</h1>
+      <small>Celulares y accesorios</small>
+    </div>
+  </header>
+
   <main class="container">
     <section class="hero">
-      <div class="heroCard">
-        <h1>Tu tienda de <span style="color:var(--brand)">celulares</span> y accesorios</h1>
-        <p class="sub">Elige una categoría para ver disponibilidad. Si no ves tu modelo, <b>pregunta por WhatsApp</b>.</p>
-
-        <!-- Turnstile -->
-        <div class="verifyWrap">
-          <div class="verifyCard" id="verifyCard">
-            <div class="verifyLeft">
-              <b>Verificación de seguridad</b>
-              <small>Completa esto una vez para habilitar WhatsApp y el catálogo.</small>
-            </div>
-
-            <div class="badgeOk hidden" id="okBadge">✅ Verificado</div>
-
-            <div id="turnstileBox">
-              <div
-                class="cf-turnstile"
-                data-sitekey="0x4AAAAAACkbPGAO2WIxAWN5"
-                data-callback="onTurnstileSuccess"
-                data-expired-callback="onTurnstileExpired"
-                data-error-callback="onTurnstileError"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2>Tu tienda de <span class="hl">celulares</span><br>y accesorios</h2>
+      <p>Elige una categoría para ver disponibilidad. Si no ves tu modelo, <b>pregunta por WhatsApp</b>.</p>
     </section>
 
-    <section class="grid" id="catsGrid">
-
-      <!-- Celulares (con tu imagen de referencia) -->
-      <a class="cat locked" id="catCelulares" href="./celulares.html">
+    <section class="grid">
+      <article class="card">
         <div class="thumb">
-          <img
-            src="https://i.postimg.cc/CMnRqj5Y/IMG-14858911-3cb3c1ba-0b36-40ae-ad1a-4d5167b5852b.jpg"
-            alt="Celulares referencia">
+          <img src="https://i.postimg.cc/CMnRqj5Y/IMG-14858911-3cb3c1ba-0b36-40ae-ad1a-4d5167b5852b.jpg" alt="Celulares">
         </div>
-        <div class="label">
-          <b>Celulares</b>
-          <span>Ver →</span>
+        <div class="content">
+          <h3>Celulares</h3>
+          <p>Modelos por pedido. Pregunta disponibilidad.</p>
         </div>
-      </a>
+        <div class="content">
+          <a id="btnCel" class="btn disabled" href="./celulares.html">Ver</a>
+        </div>
+      </article>
 
-      <a class="cat locked" id="catAccesorios" href="./accesorios.html">
-        <div class="thumb"></div>
-        <div class="label">
-          <b>Accesorios</b>
-          <span>Ver →</span>
+      <article class="card">
+        <div class="thumb">
+          <img src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="Accesorios">
         </div>
-      </a>
-
+        <div class="content">
+          <h3>Accesorios</h3>
+          <p>Fundas, vidrios templados, cargadores y más.</p>
+        </div>
+        <div class="content">
+          <a id="btnAcc" class="btn disabled" href="./accesorios.html">Ver</a>
+        </div>
+      </article>
     </section>
-
-    <footer>
-      © <span id="year"></span> JKOD Tech · Compra y soporte por WhatsApp
-    </footer>
   </main>
 
-  <button class="waFloat" id="waFloat" disabled aria-label="WhatsApp">
-    <svg viewBox="0 0 32 32">
-      <path d="M19.11 17.54c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.2-1.37-.81-.72-1.35-1.6-1.51-1.87-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.24.18 1.71.11.52-.08 1.6-.66 1.83-1.29.23-.63.23-1.17.16-1.29-.07-.12-.25-.2-.52-.34z"/>
-    </svg>
-  </button>
-
   <script>
-    const WHATSAPP_NUMBER = "573244688713";
-    const SESSION_KEY = "jkod_turnstile_ok";
+    const gate = document.getElementById("gate");
+    const statusEl = document.getElementById("status");
+    const btnCel = document.getElementById("btnCel");
+    const btnAcc = document.getElementById("btnAcc");
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const btnWhatsapp = document.getElementById("btnWhatsapp");
-    const waFloat = document.getElementById("waFloat");
-    const catCelulares = document.getElementById("catCelulares");
-    const catAccesorios = document.getElementById("catAccesorios");
-
-    function openWA(message){
-      const base = "https://wa.me/" + WHATSAPP_NUMBER;
-      const url = message ? (base + "?text=" + encodeURIComponent(message)) : base;
-      window.open(url, "_blank");
+    function unlock(){
+      gate.classList.add("hidden");
+      btnCel.classList.remove("disabled");
+      btnAcc.classList.remove("disabled");
+      sessionStorage.setItem("jkod_ts_ok","1");
     }
 
-    function lockUI(){
-      btnWhatsapp.disabled = true;
-      waFloat.disabled = true;
-      catCelulares.classList.add("locked");
-      catAccesorios.classList.add("locked");
-      sessionStorage.removeItem(SESSION_KEY);
-      document.getElementById("okBadge").classList.add("hidden");
-      document.getElementById("turnstileBox").classList.remove("hidden");
+    // Si ya validó en esta sesión
+    if(sessionStorage.getItem("jkod_ts_ok")==="1"){
+      unlock();
     }
 
-    function unlockUI(){
-      btnWhatsapp.disabled = false;
-      waFloat.disabled = false;
-      catCelulares.classList.remove("locked");
-      catAccesorios.classList.remove("locked");
-      sessionStorage.setItem(SESSION_KEY, "1");
-      document.getElementById("okBadge").classList.remove("hidden");
-      document.getElementById("turnstileBox").classList.add("hidden");
-    }
-
-    // Eventos WhatsApp
-    btnWhatsapp.addEventListener("click", ()=> openWA("Hola JKOD Tech 👋 Quiero información por favor."));
-    waFloat.addEventListener("click", ()=> openWA("Hola JKOD Tech 👋 Necesito soporte por favor."));
-
-    // Si ya verificó en esta sesión, no lo vuelve a pedir
-    if (sessionStorage.getItem(SESSION_KEY) === "1") {
-      unlockUI();
-    } else {
-      lockUI();
-    }
-
-    // Callbacks Turnstile (se llaman desde el widget)
-    window.onTurnstileSuccess = function(token){
-      // OJO: en un sitio 100% estático esto SOLO sirve como “filtro” visual.
-      // La verificación real del token se hace en servidor (Netlify Function) si la necesitas.
-      unlockUI();
+    // Callbacks que llama Turnstile
+    window.onTSok = function(){
+      statusEl.textContent = "Verificado ✅";
+      setTimeout(unlock, 200);
+    };
+    window.onTSexp = function(){
+      sessionStorage.removeItem("jkod_ts_ok");
+      statusEl.textContent = "Expiró. Verifica de nuevo.";
+      gate.classList.remove("hidden");
+    };
+    window.onTSerr = function(){
+      sessionStorage.removeItem("jkod_ts_ok");
+      statusEl.textContent = "No cargó la verificación. Revisa conexión o bloqueadores.";
+      gate.classList.remove("hidden");
     };
 
-    window.onTurnstileExpired = function(){
-      lockUI();
-    };
-
-    window.onTurnstileError = function(){
-      lockUI();
-      alert("No se pudo cargar la verificación. Revisa tu conexión e inténtalo de nuevo.");
-    };
+    // Mensaje si el script está lento/bloqueado
+    setTimeout(()=>{
+      if(!window.turnstile){
+        statusEl.textContent = "Turnstile no cargó. Desactiva AdBlock/Brave Shields y recarga.";
+      }
+    }, 2500);
   </script>
+
 </body>
 </html>
