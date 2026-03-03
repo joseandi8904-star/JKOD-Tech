@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catálogo iPhone | JKOD Tech</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f6f8;
+    color:#0f172a;
+}
+
+header{
+    background:#fff;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+header img{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+h1{
+    margin:0;
+    font-size:20px;
+}
+
+header small{
+    color:#64748b;
+}
+
+.container{
+    padding:18px;
+    max-width:900px;
+    margin:0 auto;
+}
+
+.search{
+    margin:10px 0 18px;
+    background:#fff;
+    border-radius:999px;
+    padding:12px 14px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.search input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:16px;
+    background:transparent;
+}
+
+.hero{
+    background:#fff;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.hero h2{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.hero p{
+    margin:0;
+    color:#64748b;
+}
+
+.card{
+    background:#fff;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.card img{
+    width:100%;
+    height:260px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto;
+}
+
+.card h3{
+    margin:14px 0 6px;
+    font-size:24px;
+}
+
+.card p{
+    margin:0 0 14px;
+    color:#64748b;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    background:#25D366;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.back{
+    display:inline-block;
+    margin:0 0 14px;
+    text-decoration:none;
+    color:#0f172a;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="https://i.postimg.cc/2Sp3wgPg/file-00000000d19471f58bfa68979af441ec.png" alt="JKOD Tech">
+<div>
+<h1>JKOD Tech</h1>
+<small>Catálogo iPhone</small>
+</div>
+</header>
+
+<div class="container">
+
+<a class="back" href="./celulares.html">← Volver</a>
+
+<div class="search">
+🔎 <input id="q" type="text" placeholder="Buscar modelo (ej: 12 Pro Max)">
+</div>
+
+<div class="hero">
+<h2>iPhone (11 → 17 Pro Max)</h2>
+<p>Elige tu modelo y se abre WhatsApp con el mensaje listo.</p>
+</div>
+
+<!-- 11 -->
+<div class="card" data-name="iphone 11">
+<img src="https://i.postimg.cc/L690sqgM/iphone-11.jpg">
+<h3>iPhone 11</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2011">
+Preguntar
+</a>
+</div>
+
+<!-- 11 PRO -->
+<div class="card" data-name="iphone 11 pro">
+<img src="https://i.postimg.cc/BvTxDgRP/290036-5a2ddcac-5a87-4462-9e9f-30a304b5e215.jpg">
+<h3>iPhone 11 Pro</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2011%20Pro">
+Preguntar
+</a>
+</div>
+
+<!-- 11 PRO MAX -->
+<div class="card" data-name="iphone 11 pro max">
+<img src="https://i.postimg.cc/0NsS8Sr8/4b82505c-9988-4bde-b2fb-e899a8aa345a-115ed912d260407419bccf8f859442b0.jpg">
+<h3>iPhone 11 Pro Max</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2011%20Pro%20Max">
+Preguntar
+</a>
+</div>
+
+<!-- 12 -->
+<div class="card" data-name="iphone 12">
+<img src="https://i.postimg.cc/WbzCnFNk/155598500.jpg">
+<h3>iPhone 12</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2012">
+Preguntar
+</a>
+</div>
+
+<!-- 12 PRO -->
+<div class="card" data-name="iphone 12 pro">
+<img src="https://i.postimg.cc/Vvr9S8wN/iphone-12-pro-azul-pacifico-1060x1060-4261657540.png">
+<h3>iPhone 12 Pro</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2012%20Pro">
+Preguntar
+</a>
+</div>
+
+<!-- 12 PRO MAX -->
+<div class="card" data-name="iphone 12 pro max">
+<img src="https://i.postimg.cc/wTNQwdr3/iphone-12-pro-max-azul-pacifico.webp">
+<h3>iPhone 12 Pro Max</h3>
+<p>Toca “Preguntar” para cotizar.</p>
+<a class="btn" target="_blank"
+href="https://wa.me/573244688713?text=Hola%20JKOD%20Tech%2C%20quiero%20cotizar%20iPhone%2012%20Pro%20Max">
+Preguntar
+</a>
+</div>
+
+</div>
+
+<script>
+const q=document.getElementById("q");
+const cards=document.querySelectorAll(".card");
+
+q.addEventListener("input",()=>{
+const val=q.value.toLowerCase();
+cards.forEach(card=>{
+card.style.display=card.dataset.name.includes(val)?"":"none";
+});
+});
+</script>
+
+</body>
+</html>
